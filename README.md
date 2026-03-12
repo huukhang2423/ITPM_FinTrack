@@ -1,137 +1,99 @@
 # FinTrack - Personal Finance Web App
 
-A user-friendly web application designed to help individuals, particularly students and young professionals, track their daily income and expenses.
+A full-stack web application for tracking personal income and expenses, built with React, TypeScript, Node.js, and PostgreSQL. Features JWT authentication, interactive financial dashboards, and budget management tools.
 
-## Team Members
-- Nguyễn Hữu Khang - ITDSIU21002
-- Nguyễn Bá Duy - ITDSIU21014
-- Phạm Huỳnh Thanh Quân - ITDSIU21110
-- Đặng Thái Sơn - ITDSIU21115
-- Nguyễn Thị Mai Phương - ITDSIU20080
+---
+
+## Features
+
+- **Authentication** – Secure register/login with JWT and bcrypt password hashing
+- **Transaction Management** – Full CRUD for income and expense records with category tagging
+- **Dashboard** – Visual summaries with 6-month trends, income vs. expense breakdown, and recent activity
+- **Budget Planning** – Set and track spending limits by category
+- **Data Visualization** – Interactive charts via Recharts (bar, pie, line)
+- **Responsive Design** – Mobile-friendly UI with dark mode support
+
+---
 
 ## Tech Stack
 
-### Frontend
-- React 18 + TypeScript
-- Tailwind CSS
-- Recharts (Data Visualization)
-- React Router DOM
-- Axios
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18, TypeScript, Tailwind CSS, Recharts |
+| Backend | Node.js, Express, TypeScript |
+| Database | PostgreSQL, Prisma ORM |
+| Auth | JWT, bcrypt |
+| Deployment | Vercel (frontend), Render (backend) |
 
-### Backend
-- Node.js + Express + TypeScript
-- PostgreSQL
-- Prisma ORM
-- JWT Authentication
-- bcrypt
+---
 
 ## Project Structure
 
 ```
-ITPM_PROJ/
-├── client/          # Frontend React App
-├── server/          # Backend Express API
-└── README.md
+ITPM_FinTrack/
+├── client/               # React frontend
+│   ├── src/
+│   │   ├── components/   # Reusable UI components
+│   │   ├── pages/        # Route-level pages
+│   │   └── services/     # Axios API calls
+└── server/               # Express backend
+    ├── src/
+    │   ├── routes/        # API route handlers
+    │   ├── controllers/   # Business logic
+    │   └── middleware/    # Auth middleware
+    └── prisma/            # DB schema & migrations
 ```
 
-## Features
+---
 
-### Phase 1 - MVP (Core Features)
-- [F-01] User Authentication (Register/Login)
-- [F-02] Transaction Management (CRUD)
-- [F-03] Transaction Categorization
-- [F-04] Dashboard with Summary
-- [F-05] Data Visualization (Charts)
-
-### Phase 2 - Secondary Features
-- [F-06] Budget Management
-- [F-07] Transaction History & Filtering
-
-## Setup Instructions
+## Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
-- PostgreSQL (v14+)
-- npm or yarn
+
+- Node.js v18+
+- PostgreSQL v14+
 
 ### Backend Setup
 
-1. Navigate to server directory:
 ```bash
 cd server
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
 
-3. Create `.env` file:
-```env
-DATABASE_URL="postgresql://username:password@localhost:5432/fintrack"
-JWT_SECRET="your-secret-key"
-PORT=3000
-```
+# Configure environment
+cp .env.example .env
+# Fill in: DATABASE_URL, JWT_SECRET, PORT
 
-4. Run Prisma migrations:
-```bash
+# Run database migration
 npx prisma migrate dev
-npx prisma generate
-```
+npx prisma db seed   # Seed default categories
 
-5. Seed default categories:
-```bash
-npm run seed
-```
-
-6. Start server:
-```bash
 npm run dev
 ```
 
 ### Frontend Setup
 
-1. Navigate to client directory:
 ```bash
 cd client
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
 
-3. Create `.env` file:
-```env
-VITE_API_URL=http://localhost:3000/api
-```
+# Configure environment
+cp .env.example .env
+# Fill in: VITE_API_URL=http://localhost:5000
 
-4. Start development server:
-```bash
 npm run dev
 ```
 
-## API Documentation
+---
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user
+## API Endpoints
 
-### Transactions
-- `GET /api/transactions` - Get all transactions
-- `POST /api/transactions` - Create transaction
-- `PUT /api/transactions/:id` - Update transaction
-- `DELETE /api/transactions/:id` - Delete transaction
-
-### Categories
-- `GET /api/categories` - Get all categories
-- `POST /api/categories` - Create custom category
-
-### Dashboard
-- `GET /api/dashboard/summary` - Get dashboard summary
-- `GET /api/dashboard/chart` - Get chart data
-
-## License
-
-This is an academic project for educational purposes.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register new user |
+| POST | `/api/auth/login` | Login & receive JWT |
+| GET | `/api/transactions` | Get all transactions |
+| POST | `/api/transactions` | Create transaction |
+| PUT | `/api/transactions/:id` | Update transaction |
+| DELETE | `/api/transactions/:id` | Delete transaction |
+| GET | `/api/categories` | Get all categories |
+| GET | `/api/dashboard` | Get dashboard metrics |
